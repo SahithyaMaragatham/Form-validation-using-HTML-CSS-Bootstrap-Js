@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        form {
+            border: 1px solid white;
+            text-align: center;
+            padding: 30px;
+            background-color: rgb(197, 188, 188);
+            border-radius: 10px;
+        }
+        body {
+            background-color: black;
+            color: black;
+        }
+        .success-message {
+            color: white;
+            display: none;
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; margin-top: 50px; color: white;">Form Validation</h1>
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <form action="message.html" method="post" onsubmit="return validateForm()" class="col-md-6">
+                <div class="form-group">
+                    <label for="name">First Name:</label>
+                    <input type="text" class="form-control" id="fname" >
+                </div>
+                <div class="form-group">required
+                    <label for="lname">Last Name:</label>
+                    <input type="text" class="form-control" id="lname">
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone number:</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea class="form-control" id="address" rows="3" required></textarea>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="pass">Password:</label>
+                    <input type="password" class="form-control" id="pass" required>
+                </div> -->
+                <div class="form-group">
+                    <span id="error-message" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div id="success" class="success-message" style="color: white;">
+            Submitted successfully!
+        </div>
+    </div>
+
+    <!-- <script src="/js/script.js"></script> -->
+    <script>
+        function validateForm() {
+            var phoneNo = document.getElementById("phone").value;
+            var firstName = document.getElementById("fname").value;
+            var lastName = document.getElementById("lname").value;
+            var errorMessage = document.getElementById("error-message");
+            var successMessage = document.getElementById("success");
+
+            if (firstName === null || firstName === "") {
+                errorMessage.textContent = "First name must not be empty";
+                return false;
+            } else if (lastName === null || lastName === "") {
+                errorMessage.textContent = "Last name must not be empty";
+                return false;
+            } else if (phoneNo.length < 10 || phoneNo.length > 10) {
+                errorMessage.textContent = "Phone number is invalid";
+                return false;
+            }
+
+            errorMessage.textContent = "";
+
+            successMessage.style.display = "block";
+
+            document.getElementById("fname").value = "";
+            document.getElementById("lname").value = "";
+            document.getElementById("city").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("address").value = "";
+
+            return false; 
+        }
+    </script>
+</body>
+</html>
